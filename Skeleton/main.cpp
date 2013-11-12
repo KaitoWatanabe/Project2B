@@ -7,6 +7,8 @@
 
 #include <gl\glut.h>
 
+#include <string.h>
+
 
 
 #define ERROR_CHECK( ret )  \
@@ -21,6 +23,9 @@ const NUI_IMAGE_RESOLUTION CAMERA_RESOLUTION = NUI_IMAGE_RESOLUTION_640x480;
 class KinectSample
 {
 private:
+
+#define WIDTH 320
+#define HEIGHT 240
 
   INuiSensor* kinect;
   HANDLE imageStreamHandle;
@@ -159,6 +164,7 @@ public:
       if ( skeletonData.eTrackingState == NUI_SKELETON_TRACKED ) {
         for ( int j = 0; j < NUI_SKELETON_POSITION_COUNT; ++j ) {
           if ( skeletonData.eSkeletonPositionTrackingState[j] != NUI_SKELETON_POSITION_NOT_TRACKED ) {
+			  
             drawJoint( skeletonData.SkeletonPositions[j] );
           }
         }
@@ -180,11 +186,42 @@ public:
     kinect->NuiImageGetColorPixelCoordinatesFromDepthPixelAtResolution(
       CAMERA_RESOLUTION, CAMERA_RESOLUTION,
       0, (LONG)depthX , (LONG)depthY, 0, &colorX, &colorY );
-	kinectX = colorX;
-	kinectY = colorY;
 
 	
 	
+
+	
+	
+  }
+  void Point(int x, int y, float size){
+	  glPointSize(size);
+	  glBegin(GL_POINTS);
+	  glVertex2i(x, y);
+	  glEnd();
+  }
+  void display(void)
+  {
+	  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	  glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
+	  Point(50, 50, 2.0);
+	  glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
+	  Point(250, 150, 10.0);
+	  glFlush();
+  }
+  void Init(){
+	  glClearColor(1.0, 1.0, 1.0, 1.0);
+	  glOrtho(0, WIDTH, HEIGHT, 0, -1, 1);
+  }
+  void createa(int argc, char *argv[])
+  {
+	  glutInitWindowPosition(100, 100);
+	  glutInitWindowSize(WIDTH, HEIGHT);
+	  glutInit(&argc, argv);
+	  glutCreateWindow("“_‚ð•`‰æ");
+	  glutInitDisplayMode(GLUT_RGBA);
+	  glutDisplayFunc(display);
+	  Init();
+	  glutMainLoop();
   }
 };
 
