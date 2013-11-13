@@ -5,7 +5,7 @@
 #include <Windows.h>
 #include <NuiApi.h>
 
-#include <gl/glut.h>
+#include <freeglut/glut.h>
 
 
 
