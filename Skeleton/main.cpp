@@ -7,7 +7,6 @@
 
 #include <gl/glut.h>
 
-#include <string.h>
 
 
 
@@ -24,8 +23,8 @@ class KinectSample
 {
 private:
 
-#define WIDTH 320
-#define HEIGHT 240
+#define WIDTH 640
+#define HEIGHT 480
 
   INuiSensor* kinect;
   HANDLE imageStreamHandle;
@@ -36,9 +35,6 @@ private:
   DWORD height;
 
 public:
-	int kinectX = 0;
-	int kinectY = 0;
-
   KinectSample()
   {
   }
@@ -51,6 +47,8 @@ public:
       kinect->Release();
     }
   }
+  int kinectX = 0;
+  int kinectY = 0;
 
   void initialize()
   {
@@ -84,22 +82,10 @@ public:
 
   void run()
   {
-   
-
-    // メインループ
-    while ( 1 ) {
-      // データの更新を待つ
-      DWORD ret = ::WaitForSingleObject( streamEvent, INFINITE );
-      ::ResetEvent( streamEvent );
-
-      drawDepthImage();
-      drawSkeleton();
-
-     
-      
-    }
+      getSkeleton();
   }
 
+private:
 
   void createInstance()
   {
@@ -120,40 +106,9 @@ public:
     }
   }
 
-  void drawDepthImage( )
-  {
-    // 距離カメラのフレームデータを取得する
-    NUI_IMAGE_FRAME depthFrame = { 0 };
-    ERROR_CHECK( kinect->NuiImageStreamGetNextFrame( depthStreamHandle, 0, &depthFrame ) );
 
-    // 距離データを取得する
-    NUI_LOCKED_RECT depthData = { 0 };
-    depthFrame.pFrameTexture->LockRect( 0, &depthData, 0, 0 );
-	if ( depthData.Pitch == 0 ) {
-		std::cout << "zero" << std::endl;
-	}
 
-    USHORT* depth = (USHORT*)depthData.pBits;
-    for ( int i = 0; i < (depthData.size / sizeof(USHORT)); ++i ) {
-      USHORT distance = ::NuiDepthPixelToDepth( depth[i] );
-      USHORT player = ::NuiDepthPixelToPlayerIndex( depth[i] );
-
-      LONG depthX = i % width;
-      LONG depthY = i / width;
-      LONG colorX = depthX;
-      LONG colorY = depthY;
-
-      // 距離カメラの座標を、RGBカメラの座標に変換する
-      kinect->NuiImageGetColorPixelCoordinatesFromDepthPixelAtResolution(
-        CAMERA_RESOLUTION, CAMERA_RESOLUTION,
-        0, depthX , depthY, 0, &colorX, &colorY );
-    }
-
-    // フレームデータを解放する
-    ERROR_CHECK( kinect->NuiImageStreamReleaseFrame( depthStreamHandle, &depthFrame ) );
-  }
-
-  void drawSkeleton(  )
+  void getSkeleton(  )
   {
     // スケルトンのフレームを取得する
     NUI_SKELETON_FRAME skeletonFrame = { 0 };
@@ -161,21 +116,19 @@ public:
     //ERROR_CHECK( kinect->NuiSkeletonGetNextFrame( 0, &skeletonFrame ) );
     for ( int i = 0; i < NUI_SKELETON_COUNT; ++i ) {
       NUI_SKELETON_DATA& skeletonData = skeletonFrame.SkeletonData[i];
-      if ( skeletonData.eTrackingState == NUI_SKELETON_TRACKED ) {
-        for ( int j = 0; j < NUI_SKELETON_POSITION_COUNT; ++j ) {
-          if ( skeletonData.eSkeletonPositionTrackingState[j] != NUI_SKELETON_POSITION_NOT_TRACKED ) {
-			  
-            drawJoint( skeletonData.SkeletonPositions[j] );
+      if ( skeletonData.eTrackingState == NUI_SKELETON_TRACKED ) {  
+          if ( skeletonData.eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_HAND_RIGHT] != NUI_SKELETON_POSITION_NOT_TRACKED ) {		  
+			  getJoint(skeletonData.SkeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT]);
           }
-        }
+        
       }
       else if ( skeletonData.eTrackingState == NUI_SKELETON_POSITION_ONLY ) {
-        drawJoint( skeletonData.Position );
+		  getJoint(skeletonData.SkeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT]);
       }
     }
   }
-
-  void drawJoint( Vector4 position )
+  
+  void getJoint( Vector4 position )
   {
     FLOAT depthX = 0, depthY = 0;
     ::NuiTransformSkeletonToDepthImage( position, &depthX, &depthY, CAMERA_RESOLUTION );
@@ -186,58 +139,59 @@ public:
     kinect->NuiImageGetColorPixelCoordinatesFromDepthPixelAtResolution(
       CAMERA_RESOLUTION, CAMERA_RESOLUTION,
       0, (LONG)depthX , (LONG)depthY, 0, &colorX, &colorY );
+	std::cout << (int)colorY << std::endl;
+	kinectX = (int)colorX;
+	kinectY = (int)colorY;
+	
+  }
+ 
+};
 
-	
-	
+KinectSample kinect;
 
-	
-	
-  }
-  void Point(int x, int y, float size){
-	  glPointSize(size);
-	  glBegin(GL_POINTS);
-	  glVertex2i(x, y);
-	  glEnd();
-  }
-  void display(void)
-  {
-	  glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-	  glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
-	  Point(50, 50, 2.0);
-	  glColor4f(1.0f, 0.0f, 0.0f, 1.0f);
-	  Point(250, 150, 10.0);
-	  glFlush();
-  }
-  void Init(){
-	  glClearColor(1.0, 1.0, 1.0, 1.0);
-	  glOrtho(0, WIDTH, HEIGHT, 0, -1, 1);
-  }
-  void createa(int argc, char *argv[])
-  {
+void Point(int x, int y, float size){
+	glPointSize(size);
+	glBegin(GL_POINTS);
+	glVertex2i(x, y);
+	glEnd();
+}
+void display(void)
+{
+	kinect.run();
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
+	Point(kinect.kinectX, kinect.kinectY, 20.0);
+	glFlush();
+}
+void Init(){
+	glClearColor(1.0, 1.0, 1.0, 1.0);
+	glOrtho(0, WIDTH, HEIGHT, 0, -1, 1);
+}
+void glut_idle(){
+	glutPostRedisplay();
+}
+
+int main(int argc, char *argv[])
+{
+
+  try {
+	  kinect.initialize();
 	  glutInitWindowPosition(100, 100);
 	  glutInitWindowSize(WIDTH, HEIGHT);
 	  glutInit(&argc, argv);
 	  glutCreateWindow("点を描画");
 	  glutInitDisplayMode(GLUT_RGBA);
 	  glutDisplayFunc(display);
+	  glutIdleFunc(glut_idle);
 	  Init();
 	  glutMainLoop();
-  }
-};
-
-int main(int argc, char *argv[])
-{
-
-  try {
-    KinectSample kinect;
-    kinect.initialize();
-    kinect.run();
-	
-	
+	  return 0;
+	  
   }
   catch ( std::exception& ex ) {
     std::cout << ex.what() << std::endl;
   }
 }
+
 
 
