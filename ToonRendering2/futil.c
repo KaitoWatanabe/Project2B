@@ -9,9 +9,9 @@
 #include <math.h>
 #include <windows.h>
 
-#include <glew\glew.h>
-#include <glew\wglew.h>
-#include <GL/glut.h>
+#include <gl\glew\glew.h>
+#include <gl\glew\wglew.h>
+#include <gl\freegult\freeglut.h>
 
 #include "loadbmp.h"
 #include "futil.h"

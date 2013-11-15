@@ -11,9 +11,12 @@
 #include <math.h>
 #include <windows.h>
 
-#include <glew\glew.h>
-#include <glew\wglew.h>
-#include <GL/glut.h>
+#include <gl\glew\glew.h>
+//#include <glew\glew.h>
+//#include <glew\wglew.h>
+#include <gl\glew\wglew.h>
+//#include <GL/glut.h>
+#include <gl\freegult\glut.h>
 
 #include "futil.h"
 
