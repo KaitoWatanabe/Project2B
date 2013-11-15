@@ -13,7 +13,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "first_fix", "first_fix\firs
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cube2", "cube2\cube2.vcxproj", "{21EF98DE-958D-49B8-AE5D-F060920F90BA}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glsl02cartoon", "ToonRendering2\glsl02cartoon.vcxproj", "{1C48267C-2CAC-4062-BEEF-EE13D54D9EF0}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glsl02cartoon", "ToonRendering3\glsl02cartoon.vcxproj", "{1C48267C-2CAC-4062-BEEF-EE13D54D9EF0}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
