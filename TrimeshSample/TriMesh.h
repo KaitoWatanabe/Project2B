@@ -8,7 +8,7 @@ TriMesh.h
 Class for triangle meshes.
 */
 
-#include "Vec.h"
+//#include "Vec.h"
 #include "Box.h"
 #include "Color.h"
 #include <vector>

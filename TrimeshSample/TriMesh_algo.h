@@ -10,7 +10,7 @@ Various mesh-munging algorithms using TriMeshes
 
 
 #include "TriMesh.h"
-#include "Vec.h"
+//#include "Vec.h"
 #include "Box.h"
 #include "XForm.h"
 #include "KDtree.h"

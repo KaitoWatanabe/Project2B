@@ -17,8 +17,6 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ToonRendering3", "ToonRende
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GlmSample", "GlmSample\GlmSample.vcxproj", "{5EAD1F09-CB5A-4368-9A4D-E7B0689718FC}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "TrimeshSample", "TrimeshSample\TrimeshSample.vcxproj", "{45CC00BD-0211-4BD8-AE69-7DE8927FF0D6}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -53,10 +51,6 @@ Global
 		{5EAD1F09-CB5A-4368-9A4D-E7B0689718FC}.Debug|Win32.Build.0 = Debug|Win32
 		{5EAD1F09-CB5A-4368-9A4D-E7B0689718FC}.Release|Win32.ActiveCfg = Release|Win32
 		{5EAD1F09-CB5A-4368-9A4D-E7B0689718FC}.Release|Win32.Build.0 = Release|Win32
-		{45CC00BD-0211-4BD8-AE69-7DE8927FF0D6}.Debug|Win32.ActiveCfg = Debug|Win32
-		{45CC00BD-0211-4BD8-AE69-7DE8927FF0D6}.Debug|Win32.Build.0 = Debug|Win32
-		{45CC00BD-0211-4BD8-AE69-7DE8927FF0D6}.Release|Win32.ActiveCfg = Release|Win32
-		{45CC00BD-0211-4BD8-AE69-7DE8927FF0D6}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -82,6 +82,11 @@
     <ClInclude Include="bsphere.h" />
     <ClInclude Include="Color.h" />
     <ClInclude Include="GLCamera.h" />
+    <ClInclude Include="GL\freeglut.h" />
+    <ClInclude Include="GL\freeglut_ext.h" />
+    <ClInclude Include="GL\freeglut_std.h" />
+    <ClInclude Include="GL\glui.h" />
+    <ClInclude Include="GL\glut.h" />
     <ClInclude Include="ICP.h" />
     <ClInclude Include="KDtree.h" />
     <ClInclude Include="lineqn.h" />
@@ -91,7 +96,6 @@
     <ClInclude Include="timestamp.h" />
     <ClInclude Include="TriMesh.h" />
     <ClInclude Include="TriMesh_algo.h" />
-    <ClInclude Include="Vec.h" />
     <ClInclude Include="XForm.h" />
   </ItemGroup>
   <ItemGroup>
