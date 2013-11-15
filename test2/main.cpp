@@ -1,7 +1,9 @@
 
-
-#include <gl\glut.h>
 #include <gl\GL.h>
+#include <gl\glut.h>
+
+
+
 
 #pragma region // --- Constants ---
 const double MY_MINDISTANCE = 0.1; // ƒJƒƒ‰‚©‚ç[0.1, 100.0]‚Ì”ÍˆÍ‚µ‚©•`‰æ‚µ‚È‚¢
