@@ -5,6 +5,7 @@
 #include <Windows.h>
 #include <NuiApi.h>
 
+#include "GLMetaseq.h"
 #include <gl/freeglut/glut.h>
 
 
@@ -23,8 +24,7 @@ class KinectSample
 {
 private:
 
-#define WIDTH 640
-#define HEIGHT 480
+
 
   INuiSensor* kinect;
   HANDLE imageStreamHandle;
@@ -49,6 +49,7 @@ public:
   }
   int kinectX[20];
   int kinectY[20];
+  float kinectZ[20];
 
   void initialize()
   {
@@ -139,15 +140,20 @@ private:
     kinect->NuiImageGetColorPixelCoordinatesFromDepthPixelAtResolution(
       CAMERA_RESOLUTION, CAMERA_RESOLUTION,
       0, (LONG)depthX , (LONG)depthY, 0, &colorX, &colorY );
-	std::cout << part << std::endl;
+	
 	kinectX[part] = (int)colorX;
 	kinectY[part] = (int)colorY;
+	kinectZ[part] = position.z;
 	
   }
  
 };
+#define WIDTH 640
+#define HEIGHT 480
 
 KinectSample kinect;
+GLfloat lightpos[] = { 200.0, 150.0, 500.0, 1.0 };
+MQO_MODEL model;
 
 void Point(int x, int y, float size){
 	glPointSize(size);
@@ -161,16 +167,40 @@ void display(void)
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
 	for (int i = 0; i < 20; ++i){
-		Point(kinect.kinectX[i], kinect.kinectY[i], 20.0);
+		Point(kinect.kinectX[i]-WIDTH*0.45, (kinect.kinectY[i]-HEIGHT*0.45)*(-1), 20.0);
 	}
-	
-	glFlush();
+	glViewport(0, 0, WIDTH, HEIGHT);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	//視野角,アスペクト比(ウィンドウの幅/高さ),描画する範囲(最も近い距離,最も遠い距離)
+	gluPerspective(30.0, (double)WIDTH / (double)HEIGHT, 1.0, 10000.0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	//視点の設定
+	gluLookAt(kinect.kinectX[NUI_SKELETON_POSITION_HAND_LEFT] - WIDTH / 2, 
+		(kinect.kinectY[NUI_SKELETON_POSITION_HAND_LEFT] - HEIGHT / 2)*(-1), 
+		500.0*kinect.kinectZ[NUI_SKELETON_POSITION_HAND_LEFT], //カメラの座標
+		0.0, 100.0, 0.0, // 注視点の座標
+		0.0, 1.0, 0.0); // 画面の上方向を指すベクトル
+
+	std::cout << kinect.kinectX[NUI_SKELETON_POSITION_HAND_LEFT] << std::endl;
+	//ライトの設定
+	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+
+	mqoCallModel(model);
+
+	glutSwapBuffers();
 }
 void Init(){
-	glClearColor(1.0, 1.0, 1.0, 1.0);
-	glOrtho(0, WIDTH, HEIGHT, 0, -1, 1);
+	glClearColor(0.3, 0.3, 0.3, 1.0);
+	glEnable(GL_DEPTH_TEST);
+	glEnable(GL_LIGHTING);
+	glEnable(GL_LIGHT0);
+	mqoInit();
+	model = mqoCreateModel("mikumikoto.mqo", 2.0);
 }
-void glut_idle(){
+void idle(void)
+{
 	glutPostRedisplay();
 }
 
@@ -182,12 +212,14 @@ int main(int argc, char *argv[])
 	  glutInitWindowPosition(100, 100);
 	  glutInitWindowSize(WIDTH, HEIGHT);
 	  glutInit(&argc, argv);
-	  glutCreateWindow("点を描画");
-	  glutInitDisplayMode(GLUT_RGBA);
+	  glutCreateWindow(".MQOを読み込んで表示");
+	  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 	  glutDisplayFunc(display);
-	  glutIdleFunc(glut_idle);
+	  glutIdleFunc(idle);
 	  Init();
 	  glutMainLoop();
+	  mqoDeleteModel(model);
+	  mqoCleanup();
 	  return 0;
 	  
   }

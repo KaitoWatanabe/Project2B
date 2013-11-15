@@ -223,8 +223,8 @@ Copyright (c) 2009 Sunao Hashimoto and Keisuke Konishi
 	#include <OpenGL/glext.h>
 #else
 	#include <GL/gl.h>
-	#include <GL/glu.h>
-//	#include <GL/glut.h>
+	#include <gl/GLU.h>
+	//#include <GL/glut.h>
 //	#include <gl/glext.h>
 #endif
 

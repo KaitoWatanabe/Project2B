@@ -284,8 +284,8 @@ GLuint mqoSetTexturePool(char *texfile, char *alpfile, unsigned char alpha )
 		return -1;
 	}
 
-	if ( texfile != NULL ) strncpy(l_texPool[pos].texfile,texfile,MAX_PATH);
-	if ( alpfile != NULL ) strncpy(l_texPool[pos].alpfile,alpfile,MAX_PATH);
+	if (texfile != NULL) strncpy_s(l_texPool[pos].texfile, _countof(l_texPool[pos].texfile), texfile, MAX_PATH);
+	if (alpfile != NULL) strncpy_s(l_texPool[pos].alpfile, _countof(l_texPool[pos].alpfile), alpfile, MAX_PATH);
 	l_texPool[pos].alpha = alpha;
 
 	glPixelStorei(GL_UNPACK_ALIGNMENT,4);
@@ -407,8 +407,9 @@ GLubyte* mqoLoadTextureEx(char *texfile,char *alpfile,int *tex_size,unsigned cha
 				break;
 			}
 		}
+		errno_t error;
 		if ( fp != NULL ) fclose(fp);
-		if ( (fp=fopen(filename[fl],"rb"))==NULL ) {
+		if ( (error=fopen_s(&fp,filename[fl],"rb"))!=0 ) {
 			printf("%s:テクスチャ読み込みエラー[%s]\n",__FILE__,filename[fl]);
 			continue;
 		}
@@ -655,8 +656,9 @@ int mqoLoadFile( MQO_OBJECT *mqoobj, char *filename, double scale, unsigned char
 	int		i;
 
 	// MaterialとObjectの読み込み
-	fp = fopen(filename,"rb");
-	if (fp==NULL) return 0;
+	errno_t error;
+	error = fopen_s(&fp,filename,"rb");
+	if (error!=0) return 0;
 
 	mqoobj->alpha = alpha;
 	memset(obj,0,sizeof(obj));
@@ -667,14 +669,14 @@ int mqoLoadFile( MQO_OBJECT *mqoobj, char *filename, double scale, unsigned char
 
 		// Material
 		if (strstr(buf,"Material")) {
-			sscanf(buf,"Material %d", &n_mat);
+			sscanf_s(buf, "Material %d", &n_mat, sizeof(&n_mat));
 			M = (MQO_MATDATA*) calloc( n_mat, sizeof(MQO_MATDATA) );
 			mqoReadMaterial(fp,M);
 		}
 
 		// Object
 		if (strstr(buf,"Object")) {
-			sscanf(buf,"Object %s", obj[i].objname);
+			sscanf_s(buf, "Object %s", obj[i].objname, sizeof(obj[i].objname));
 			mqoReadObject(fp, &obj[i]);
 			i++;
 		}
@@ -690,16 +692,16 @@ int mqoLoadFile( MQO_OBJECT *mqoobj, char *filename, double scale, unsigned char
 		if (M[i].useTex) {
 
 			if (strstr(M[i].texFile,":")) {
-				strcpy(path_tex, M[i].texFile);	// 絶対パスの場合
+				strcpy_s(path_tex, _countof(path_tex), M[i].texFile);	// 絶対パスの場合
 			} else {
-				sprintf(path_tex,"%s%s",path_dir,M[i].texFile);	// 相対パスの場合
+				sprintf_s(path_tex,256,"%s%s",path_dir,M[i].texFile);	// 相対パスの場合
 			}
 
 			if ( M[i].alpFile[0] != (char)0 ) {
 				if (strstr(M[i].texFile,":")) {
-					strcpy(path_alp, M[i].alpFile);	// 絶対パスの場合
+					strcpy_s(path_alp, _countof(path_alp), M[i].alpFile);	// 絶対パスの場合
 				} else {
-					sprintf(path_alp,"%s%s",path_dir,M[i].alpFile);	// 相対パスの場合
+					sprintf_s(path_alp,256,"%s%s",path_dir,M[i].alpFile);	// 相対パスの場合
 				}
 				M[i].texName = mqoSetTexturePool(path_tex,path_alp,alpha);
 			}
@@ -959,7 +961,7 @@ void mqoGetDirectory(const char *path_file, char *path_dir)
 
 	pStr = MAX( strrchr(path_file,'\\'), strrchr(path_file,'/') );
 	len = MAX((int)(pStr-path_file)+1,0);
-	strncpy(path_dir,path_file,len);
+	strncpy_s(path_dir, _countof(path_dir), path_file, len);
 	path_dir[len] = (char)0;
 }
 
@@ -1034,9 +1036,9 @@ void mqoReadMaterial(FILE *fp, MQO_MATDATA M[])
 		if (strstr(buf,"}")) break;
 
 		pStr = strstr(buf,"col(");	// 材質名読み飛ばし
-		sscanf( pStr,
+		sscanf_s( pStr,
 				"col(%f %f %f %f) dif (%f) amb(%f) emi(%f) spc(%f) power(%f)",
-				&c.r, &c.g, &c.b, &c.a, &dif, &amb, &emi, &spc, &M[i].power );
+				&c.r, &c.g, &c.b, &c.a, &dif, &amb, &emi, &spc, &M[i].power, sizeof(M[i]));
 
 		// 頂点カラー
 		M[i].col = c;
@@ -1071,12 +1073,12 @@ void mqoReadMaterial(FILE *fp, MQO_MATDATA M[])
 
 			pStrEnd = strstr(pStr,")")-1;
 			len = pStrEnd - (pStr+5);
-			strncpy(M[i].texFile,pStr+5,len);
+			strncpy_s(M[i].texFile, _countof(M[i].texFile), pStr + 5, len);
 			M[i].texFile[len] = (char)0;
 			if ( (pStr = strstr(buf,"aplane(")) != NULL ) {
 				pStrEnd = strstr(pStr,")")-1;
 				len = pStrEnd - (pStr+8);
-				strncpy(M[i].alpFile,pStr+8,len);
+				strncpy_s(M[i].alpFile, _countof(M[i].alpFile),pStr + 8, len);
 				M[i].alpFile[len] = (char)0;
 			}
 			else {
@@ -1114,7 +1116,7 @@ void mqoReadVertex(FILE *fp, glPOINT3f V[])
 	while (1) {
 		fgets(buf,SIZE_STR,fp);
 		if (strstr(buf,"}")) break;
-		sscanf(buf,"%f %f %f",&V[i].x,&V[i].y,&V[i].z);
+		sscanf_s(buf, "%f %f %f", &V[i].x, &V[i].y, &V[i].z, sizeof(V[i]));
 		i++;
 	}
 }
@@ -1141,7 +1143,7 @@ int mqoReadBVertex(FILE *fp, glPOINT3f V[])
 
 	fgets(cw,sizeof(cw),fp);
 	if ( (pStr = strstr(cw,"Vector")) != NULL ) {
-		sscanf(pStr,"Vector %d [%d]",&n_vertex,&size);	// 頂点数、データサイズを読み込む
+		sscanf_s(pStr,"Vector %d [%d]",&n_vertex,&size,sizeof(size));	// 頂点数、データサイズを読み込む
 	}
 	else {
 		return -1;
@@ -1197,21 +1199,21 @@ void mqoReadFace(FILE *fp, MQO_FACE F[])
 		if (strstr(buf,"}")) break;
 
 		// 面を構成する頂点数
-		sscanf(buf,"%d",&F[i].n);
+		sscanf_s(buf,"%d",&F[i].n,sizeof(F[i]));
 
 		// 頂点(V)の読み込み
 		if ( (pStr = strstr(buf,"V(")) != NULL ) {
 			switch (F[i].n) {
-				case 3:
-//メタセコは頂点の並びが表面からみて右回り
-//読み込み時に並べ替える方法もある。けど、表面の設定を
-//glFrontFaceで変えるほうがスマート？
-					sscanf(pStr,"V(%d %d %d)",&F[i].v[0],&F[i].v[1],&F[i].v[2]);
-//					sscanf(pStr,"V(%d %d %d)",&F[i].v[2],&F[i].v[1],&F[i].v[0]);
+			case 3:
+				//メタセコは頂点の並びが表面からみて右回り
+				//読み込み時に並べ替える方法もある。けど、表面の設定を
+				//glFrontFaceで変えるほうがスマート？
+				sscanf_s(pStr, "V(%d %d %d)", &F[i].v[0], &F[i].v[1], &F[i].v[2], sizeof(F[i]));
+//					sscanf_s(pStr,"V(%d %d %d)",&F[i].v[2],&F[i].v[1],&F[i].v[0]);
 					break;
 				case 4:
-					sscanf(pStr,"V(%d %d %d %d)",&F[i].v[0],&F[i].v[1],&F[i].v[2],&F[i].v[3]);
-//					sscanf(pStr,"V(%d %d %d %d)",&F[i].v[3],&F[i].v[2],&F[i].v[1],&F[i].v[0]);
+					sscanf_s(pStr, "V(%d %d %d %d)", &F[i].v[0], &F[i].v[1], &F[i].v[2], &F[i].v[3], sizeof(F[i]));
+//					sscanf_s(pStr,"V(%d %d %d %d)",&F[i].v[3],&F[i].v[2],&F[i].v[1],&F[i].v[0]);
 					break;
 				default:
 					break;
@@ -1221,7 +1223,7 @@ void mqoReadFace(FILE *fp, MQO_FACE F[])
 		// マテリアル(M)の読み込み
 		F[i].m = 0;
 		if ( (pStr = strstr(buf,"M(")) != NULL ) {
-			sscanf(pStr,"M(%d)",&F[i].m);
+			sscanf_s(pStr, "M(%d)", &F[i].m, sizeof(F[i]));
 		}
 		else { // マテリアルが設定されていない面
 			F[i].m = -1;
@@ -1231,19 +1233,20 @@ void mqoReadFace(FILE *fp, MQO_FACE F[])
 		if ( (pStr = strstr(buf,"UV(")) != NULL ) {
 			switch (F[i].n) {
 				case 3:	// 頂点数3
-					sscanf(pStr,"UV(%f %f %f %f %f %f)",
-									&F[i].uv[0].x, &F[i].uv[0].y,
-									&F[i].uv[1].x, &F[i].uv[1].y,
-									&F[i].uv[2].x, &F[i].uv[2].y
-									);
-					break;
-
-				case 4:	// 頂点数4
-					sscanf(pStr,"UV(%f %f %f %f %f %f %f %f)",
+					sscanf_s(pStr,"UV(%f %f %f %f %f %f)",
 									&F[i].uv[0].x, &F[i].uv[0].y,
 									&F[i].uv[1].x, &F[i].uv[1].y,
 									&F[i].uv[2].x, &F[i].uv[2].y,
-									&F[i].uv[3].x, &F[i].uv[3].y
+									sizeof(F[i]));
+					break;
+
+				case 4:	// 頂点数4
+					sscanf_s(pStr,"UV(%f %f %f %f %f %f %f %f)",
+									&F[i].uv[0].x, &F[i].uv[0].y,
+									&F[i].uv[1].x, &F[i].uv[1].y,
+									&F[i].uv[2].x, &F[i].uv[2].y,
+									&F[i].uv[3].x, &F[i].uv[3].y,
+									sizeof(F[i])
 									);
 					break;
 				default:
@@ -1278,35 +1281,35 @@ void mqoReadObject(FILE *fp, MQO_OBJDATA *obj)
 
 		// visible
 		if (strstr(buf,"visible ")) {
-			sscanf(buf," visible %d", &obj->visible);
+			sscanf_s(buf, " visible %d", &obj->visible, sizeof(obj->visible));
 		}
 
 		// shading
 		if (strstr(buf,"shading ")) {
-			sscanf(buf," shading %d", &obj->shading);
+			sscanf_s(buf, " shading %d", &obj->shading, sizeof(obj->shading));
 		}
 
 		// facet
 		if (strstr(buf,"facet ")) {
-			sscanf(buf," facet %f", &obj->facet);
+			sscanf_s(buf, " facet %f", &obj->facet, sizeof(obj->facet));
 		}
 
 		// vertex
 		if (strstr(buf,"vertex ")) {
-			sscanf(buf," vertex %d", &obj->n_vertex);
+			sscanf_s(buf, " vertex %d", &obj->n_vertex, sizeof(obj->n_vertex));
 			obj->V = (glPOINT3f*) calloc( obj->n_vertex, sizeof(glPOINT3f) );
 			mqoReadVertex(fp, obj->V);
 		}
 		// BVertex
 		if (strstr(buf,"BVertex"))	{
-			sscanf(buf," BVertex %d", &obj->n_vertex);
+			sscanf_s(buf, " BVertex %d", &obj->n_vertex, sizeof(obj->n_vertex));
 			obj->V = (glPOINT3f*) calloc( obj->n_vertex, sizeof(glPOINT3f) );
 			mqoReadBVertex(fp,obj->V);
 		}
 
 		// face
 		if (strstr(buf,"face ")) {
-			sscanf(buf," face %d", &obj->n_face);
+			sscanf_s(buf, " face %d", &obj->n_face, sizeof(obj->n_face));
 			obj->F = (MQO_FACE*) calloc( obj->n_face, sizeof(MQO_FACE) );
 			mqoReadFace(fp, obj->F);
 		}
@@ -1605,7 +1608,7 @@ void mqoMakePolygon(MQO_OBJDATA *readObj, MQO_OBJECT *mqoobj,
 
 
 	setObj = &mqoobj->obj[mqoobj->objnum];
-	strcpy(setObj->objname,readObj->objname);
+	strcpy_s(setObj->objname, _countof(setObj->objname), readObj->objname);
 	setObj->isVisible = readObj->visible;
 	setObj->isShadingFlat = (readObj->shading == 0);
 	F = readObj->F;
@@ -1790,7 +1793,7 @@ MQO_SEQUENCE mqoCreateSequenceEx(const char *format, int n_file, double scale,
 	retSeq.model = mqoCreateList(n_file);
 	for ( seq = 0; seq < frames; seq++ ) {
 		if ( seq < n_file ) {
-			sprintf(filename,format,seq);
+			sprintf_s(filename,256,format,seq);
 		}
 		if ( (fade_inout !=  0) && ((frames-1) == seq) ) {
 			setAlpha = (fade_inout<0)?0:calAlpha;
