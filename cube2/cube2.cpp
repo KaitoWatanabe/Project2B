@@ -2,8 +2,8 @@
 //
 
 #include "stdafx.h"
-#include <gl\glut.h>
-#include <freegult\freeglut.h>
+#include <gl/freeglut/glut.h>
+#include <gl/freeglut/freeglut.h>
 
 #define WIDTH 320
 #define HEIGHT 240

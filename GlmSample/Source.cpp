@@ -1,4 +1,4 @@
-#include <glm/glm.hpp>
+#include <gl/glm/glm.hpp>
 #include <gl/freeglut/glut.h>
 
 //----------- プロトタイプ宣言 --------------//
