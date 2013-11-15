@@ -28,20 +28,23 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="akuma.mqo" />
+    <Image Include="eye.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="face.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="huriru.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="huriru1.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
+    <Image Include="texture.png">
+      <Filter>リソース ファイル</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="body.bmp">
-      <Filter>リソース ファイル</Filter>
-    </Image>
-    <Image Include="face.bmp">
-      <Filter>リソース ファイル</Filter>
-    </Image>
-    <Image Include="hane.png">
-      <Filter>リソース ファイル</Filter>
-    </Image>
-    <Image Include="hear_kuro.bmp">
-      <Filter>リソース ファイル</Filter>
-    </Image>
+    <None Include="mikumikoto.mqo" />
   </ItemGroup>
 </Project>

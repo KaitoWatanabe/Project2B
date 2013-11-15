@@ -19,7 +19,7 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GlmSample", "GlmSample\GlmS
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MqoSample", "MqoSample\MqoSample.vcxproj", "{7E56E692-B41B-4505-92E3-D0E51A3CC814}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MpoSample1", "MpoSample1\MpoSample1.vcxproj", "{8A06F81B-8D5A-46AC-B13E-2D0C67297654}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Skeleton2", "Skeleton2\Skeleton2.vcxproj", "{0C53E8F8-B02A-4544-8DA7-B1FB4BA712B8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,10 +59,10 @@ Global
 		{7E56E692-B41B-4505-92E3-D0E51A3CC814}.Debug|Win32.Build.0 = Debug|Win32
 		{7E56E692-B41B-4505-92E3-D0E51A3CC814}.Release|Win32.ActiveCfg = Release|Win32
 		{7E56E692-B41B-4505-92E3-D0E51A3CC814}.Release|Win32.Build.0 = Release|Win32
-		{8A06F81B-8D5A-46AC-B13E-2D0C67297654}.Debug|Win32.ActiveCfg = Debug|Win32
-		{8A06F81B-8D5A-46AC-B13E-2D0C67297654}.Debug|Win32.Build.0 = Debug|Win32
-		{8A06F81B-8D5A-46AC-B13E-2D0C67297654}.Release|Win32.ActiveCfg = Release|Win32
-		{8A06F81B-8D5A-46AC-B13E-2D0C67297654}.Release|Win32.Build.0 = Release|Win32
+		{0C53E8F8-B02A-4544-8DA7-B1FB4BA712B8}.Debug|Win32.ActiveCfg = Debug|Win32
+		{0C53E8F8-B02A-4544-8DA7-B1FB4BA712B8}.Debug|Win32.Build.0 = Debug|Win32
+		{0C53E8F8-B02A-4544-8DA7-B1FB4BA712B8}.Release|Win32.ActiveCfg = Release|Win32
+		{0C53E8F8-B02A-4544-8DA7-B1FB4BA712B8}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

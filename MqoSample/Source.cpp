@@ -40,7 +40,7 @@ void Init(){
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	mqoInit();
-	model = mqoCreateModel("akuma.mqo", 1.0);
+	model = mqoCreateModel("mikumikoto.mqo", 2.0);
 }
 int main(int argc, char *argv[])
 {

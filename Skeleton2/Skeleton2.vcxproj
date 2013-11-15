@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{7E56E692-B41B-4505-92E3-D0E51A3CC814}</ProjectGuid>
+    <ProjectGuid>{0C53E8F8-B02A-4544-8DA7-B1FB4BA712B8}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>MqoSample</RootNamespace>
+    <RootNamespace>Skeleton2</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -78,21 +78,6 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="GLMetaseq.c" />
-    <ClCompile Include="Source.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="GLMetaseq.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="eye.png" />
-    <Image Include="face.png" />
-    <Image Include="huriru.png" />
-    <Image Include="huriru1.png" />
-    <Image Include="texture.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="mikumikoto.mqo" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
