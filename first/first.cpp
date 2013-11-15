@@ -9,18 +9,6 @@
 
 #include "stdafx.h"
 
-int main(int argc, char* argv[]){
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGBA | GLUT_DEPTH);
-	glutInitWindowPosition(100, 100);
-	glutInitWindowSize(640, 480);
-	glutCreateWindow("3D Cube");
-	glutReshapeFunc(reshape);
-	glutDisplayFunc(display);
-	glutMainLoop();
-
-	return 0;
-}
 
 void display(){
 	static GLfloat vertices[8][3] =
@@ -112,6 +100,7 @@ void reshape(int width, int height){
 
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	//glLookAt(0.5, 1.5, 2.5, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
+	gluLookAt(0.5, 1.5, 2.5, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0);
 
 }
+

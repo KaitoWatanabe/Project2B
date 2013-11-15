@@ -5,8 +5,13 @@
 ↑もとのサンプルコードにあった記述
 */
 
-#include <gl\glut.h>
+#include <iostream>
+#include <stdio.h>
 
+#include <gl\glut.h>
+//#include <cmath>
+
+using namespace std;
 
 
 void display(){
@@ -110,6 +115,9 @@ int main(int argc, char* argv[]){
 	glutCreateWindow("3D Cube");
 	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
+
+ cout << "Hello!" <<  endl;
+	
 	glutMainLoop();
 
 	return 0;

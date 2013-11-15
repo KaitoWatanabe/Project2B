@@ -15,6 +15,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Skeleton", "Skeleton\Skelet
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "first_fix", "first_fix\first_fix.vcxproj", "{2218A47B-D95A-4FCF-A691-EB58DFE36F79}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "cube2", "cube2\cube2.vcxproj", "{21EF98DE-958D-49B8-AE5D-F060920F90BA}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "glsl02cartoon", "ToonRendering2\glsl02cartoon.vcxproj", "{1C48267C-2CAC-4062-BEEF-EE13D54D9EF0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -45,6 +49,14 @@ Global
 		{2218A47B-D95A-4FCF-A691-EB58DFE36F79}.Debug|Win32.Build.0 = Debug|Win32
 		{2218A47B-D95A-4FCF-A691-EB58DFE36F79}.Release|Win32.ActiveCfg = Release|Win32
 		{2218A47B-D95A-4FCF-A691-EB58DFE36F79}.Release|Win32.Build.0 = Release|Win32
+		{21EF98DE-958D-49B8-AE5D-F060920F90BA}.Debug|Win32.ActiveCfg = Debug|Win32
+		{21EF98DE-958D-49B8-AE5D-F060920F90BA}.Debug|Win32.Build.0 = Debug|Win32
+		{21EF98DE-958D-49B8-AE5D-F060920F90BA}.Release|Win32.ActiveCfg = Release|Win32
+		{21EF98DE-958D-49B8-AE5D-F060920F90BA}.Release|Win32.Build.0 = Release|Win32
+		{1C48267C-2CAC-4062-BEEF-EE13D54D9EF0}.Debug|Win32.ActiveCfg = Debug|Win32
+		{1C48267C-2CAC-4062-BEEF-EE13D54D9EF0}.Debug|Win32.Build.0 = Debug|Win32
+		{1C48267C-2CAC-4062-BEEF-EE13D54D9EF0}.Release|Win32.ActiveCfg = Release|Win32
+		{1C48267C-2CAC-4062-BEEF-EE13D54D9EF0}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
