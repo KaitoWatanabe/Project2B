@@ -47,8 +47,8 @@ public:
       kinect->Release();
     }
   }
-  int kinectX = 0;
-  int kinectY = 0;
+  int kinectX[20];
+  int kinectY[20];
 
   void initialize()
   {
@@ -117,18 +117,18 @@ private:
     for ( int i = 0; i < NUI_SKELETON_COUNT; ++i ) {
       NUI_SKELETON_DATA& skeletonData = skeletonFrame.SkeletonData[i];
       if ( skeletonData.eTrackingState == NUI_SKELETON_TRACKED ) {  
-          if ( skeletonData.eSkeletonPositionTrackingState[NUI_SKELETON_POSITION_HAND_RIGHT] != NUI_SKELETON_POSITION_NOT_TRACKED ) {		  
-			  getJoint(skeletonData.SkeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT]);
-          }
+		  for (int j = 0; j < NUI_SKELETON_POSITION_COUNT; ++j){
+			  if (skeletonData.eSkeletonPositionTrackingState[j] != NUI_SKELETON_POSITION_NOT_TRACKED) {
+				  getJoint(skeletonData.SkeletonPositions[j], j);
+			  }
+		  }
         
       }
-      else if ( skeletonData.eTrackingState == NUI_SKELETON_POSITION_ONLY ) {
-		  getJoint(skeletonData.SkeletonPositions[NUI_SKELETON_POSITION_HAND_RIGHT]);
-      }
+
     }
   }
   
-  void getJoint( Vector4 position )
+  void getJoint( Vector4 position, int part )
   {
     FLOAT depthX = 0, depthY = 0;
     ::NuiTransformSkeletonToDepthImage( position, &depthX, &depthY, CAMERA_RESOLUTION );
@@ -139,9 +139,9 @@ private:
     kinect->NuiImageGetColorPixelCoordinatesFromDepthPixelAtResolution(
       CAMERA_RESOLUTION, CAMERA_RESOLUTION,
       0, (LONG)depthX , (LONG)depthY, 0, &colorX, &colorY );
-	std::cout << (int)colorY << std::endl;
-	kinectX = (int)colorX;
-	kinectY = (int)colorY;
+	std::cout << part << std::endl;
+	kinectX[part] = (int)colorX;
+	kinectY[part] = (int)colorY;
 	
   }
  
@@ -160,7 +160,10 @@ void display(void)
 	kinect.run();
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glColor4f(0.0f, 0.0f, 1.0f, 1.0f);
-	Point(kinect.kinectX, kinect.kinectY, 20.0);
+	for (int i = 0; i < 20; ++i){
+		Point(kinect.kinectX[i], kinect.kinectY[i], 20.0);
+	}
+	
 	glFlush();
 }
 void Init(){
