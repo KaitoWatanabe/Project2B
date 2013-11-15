@@ -17,6 +17,10 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ToonRendering3", "ToonRende
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "GlmSample", "GlmSample\GlmSample.vcxproj", "{5EAD1F09-CB5A-4368-9A4D-E7B0689718FC}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MqoSample", "MqoSample\MqoSample.vcxproj", "{7E56E692-B41B-4505-92E3-D0E51A3CC814}"
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "MpoSample1", "MpoSample1\MpoSample1.vcxproj", "{8A06F81B-8D5A-46AC-B13E-2D0C67297654}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -51,6 +55,14 @@ Global
 		{5EAD1F09-CB5A-4368-9A4D-E7B0689718FC}.Debug|Win32.Build.0 = Debug|Win32
 		{5EAD1F09-CB5A-4368-9A4D-E7B0689718FC}.Release|Win32.ActiveCfg = Release|Win32
 		{5EAD1F09-CB5A-4368-9A4D-E7B0689718FC}.Release|Win32.Build.0 = Release|Win32
+		{7E56E692-B41B-4505-92E3-D0E51A3CC814}.Debug|Win32.ActiveCfg = Debug|Win32
+		{7E56E692-B41B-4505-92E3-D0E51A3CC814}.Debug|Win32.Build.0 = Debug|Win32
+		{7E56E692-B41B-4505-92E3-D0E51A3CC814}.Release|Win32.ActiveCfg = Release|Win32
+		{7E56E692-B41B-4505-92E3-D0E51A3CC814}.Release|Win32.Build.0 = Release|Win32
+		{8A06F81B-8D5A-46AC-B13E-2D0C67297654}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8A06F81B-8D5A-46AC-B13E-2D0C67297654}.Debug|Win32.Build.0 = Debug|Win32
+		{8A06F81B-8D5A-46AC-B13E-2D0C67297654}.Release|Win32.ActiveCfg = Release|Win32
+		{8A06F81B-8D5A-46AC-B13E-2D0C67297654}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
