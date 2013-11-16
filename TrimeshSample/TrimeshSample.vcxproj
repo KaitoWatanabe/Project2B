@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2218A47B-D95A-4FCF-A691-EB58DFE36F79}</ProjectGuid>
+    <ProjectGuid>{45CC00BD-0211-4BD8-AE69-7DE8927FF0D6}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>first_fix</RootNamespace>
+    <RootNamespace>TrimeshSample</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -57,8 +57,6 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files\Microsoft SDKs\Windows\v_._\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -80,7 +78,28 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="Source.cpp" />
+    <ClInclude Include="Box.h" />
+    <ClInclude Include="bsphere.h" />
+    <ClInclude Include="Color.h" />
+    <ClInclude Include="GLCamera.h" />
+    <ClInclude Include="GL\freeglut.h" />
+    <ClInclude Include="GL\freeglut_ext.h" />
+    <ClInclude Include="GL\freeglut_std.h" />
+    <ClInclude Include="GL\glui.h" />
+    <ClInclude Include="GL\glut.h" />
+    <ClInclude Include="ICP.h" />
+    <ClInclude Include="KDtree.h" />
+    <ClInclude Include="lineqn.h" />
+    <ClInclude Include="mempool.h" />
+    <ClInclude Include="noise3d.h" />
+    <ClInclude Include="strutil.h" />
+    <ClInclude Include="timestamp.h" />
+    <ClInclude Include="TriMesh.h" />
+    <ClInclude Include="TriMesh_algo.h" />
+    <ClInclude Include="XForm.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="mesh_check.cc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

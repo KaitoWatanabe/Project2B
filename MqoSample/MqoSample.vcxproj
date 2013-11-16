@@ -11,9 +11,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2218A47B-D95A-4FCF-A691-EB58DFE36F79}</ProjectGuid>
+    <ProjectGuid>{7E56E692-B41B-4505-92E3-D0E51A3CC814}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>first_fix</RootNamespace>
+    <RootNamespace>MqoSample</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -57,8 +57,6 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files\Microsoft SDKs\Windows\v_._\Lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>freeglut.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -80,7 +78,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="GLMetaseq.c" />
     <ClCompile Include="Source.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="GLMetaseq.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="eye.png" />
+    <Image Include="face.png" />
+    <Image Include="huriru.png" />
+    <Image Include="huriru1.png" />
+    <Image Include="texture.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="mikumikoto.mqo" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
