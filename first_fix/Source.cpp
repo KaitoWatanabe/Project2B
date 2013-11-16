@@ -8,7 +8,7 @@
 #include <iostream>
 #include <stdio.h>
 
-#include <gl\freegult\glut.h>
+#include <gl\freeglut\glut.h>
 //#include <cmath>
 
 using namespace std;

@@ -1,12 +1,14 @@
 // cube2.cpp : コンソール アプリケーションのエントリ ポイントを定義します。
 //
 
+
 #include "stdafx.h"
-#include <gl\glut.h>
-#include <freegult\freeglut.h>
+#include <gl\freeglut\glut.h>
+#include <gl\freeglut\freeglut.h>
 
 #define WIDTH 320
 #define HEIGHT 240
+
 
 //回転用
 float angle = 0.0f;
