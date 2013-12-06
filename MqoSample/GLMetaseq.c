@@ -934,7 +934,7 @@ void mqoCallListObject(MQO_OBJECT mqoobj[],int num)
 				}
 			}
 		}
-
+		
 		//メタセコは頂点の並びが表面からみて右回り（元の設定にもどす）
 		glFrontFace(intFrontFace);
 	glPopMatrix();
