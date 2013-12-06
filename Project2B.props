@@ -5,7 +5,9 @@
   <PropertyGroup />
   <ItemDefinitionGroup>
     <ClCompile>
-      <AdditionalUsingDirectories>C:\openCV2.4.6.0\build\include;$(KINECTSDK10_DIR)\inc</AdditionalUsingDirectories>
+      <AdditionalUsingDirectories>
+      </AdditionalUsingDirectories>
+      <AdditionalIncludeDirectories>C:\openCV2.4.6.0\build\include;$(KINECTSDK10_DIR)\inc</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <AdditionalLibraryDirectories>C:\Program Files\Microsoft SDKs\Windows\v_._\Lib;C:\openCV2.4.6.0\build\x86\vc10\lib;$(KINECTSDK10_DIR)\lib\x86;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>

@@ -4,15 +4,19 @@
 //#include "GLMetaseq.h"
 #include <gl/freeglut/freeglut.h>
 #include <cmath>
+#include <gl/glm/glm.hpp>
 #define WIDTH 640
 #define HEIGHT 480
 
 using namespace std;
+using namespace glm;
+
 //Chapter.7 Geometric Models and Their Exploitation in NPR
 
 void algorithm_7_1(){//classify edges based on the angle between adjacent faces in the model M
+
 	/*for ( polygon : p) {// Model M Ç≈èàóù
-	compute the normal vector np for p
+	vec3 np(0, 1, 0); <-compute the normal vector np for p
 	if (np.dot(V) > 0) {
 	mark p as visible;
 	}else{
