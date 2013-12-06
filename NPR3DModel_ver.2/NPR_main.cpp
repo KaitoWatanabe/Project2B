@@ -7,6 +7,7 @@
 #define WIDTH 640
 #define HEIGHT 480
 
+using namespace std;
 //Chapter.7 Geometric Models and Their Exploitation in NPR
 
 void algorithm_7_1(){//classify edges based on the angle between adjacent faces in the model M
@@ -101,10 +102,30 @@ void algorithm_7_5(){
 	*/
 }
 
-
-
+/*
 int main(int argc, char *argv[])
 {
-	return 0;
+
+	try {
+		kinect.initialize();
+		glutInitWindowPosition(100, 100);
+		glutInitWindowSize(WIDTH, HEIGHT);
+		glutInit(&argc, argv);
+		glutCreateWindow(".MQOÇì«Ç›çûÇÒÇ≈ï\é¶");
+		glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
+
+		glutDisplayFunc(display);
+		glutIdleFunc(idle);
+		Init();
+		glutMainLoop();
+		mqoDeleteModel(model);
+		mqoCleanup();
+		return 0;
+
+	}
+	catch (exception& ex) {
+		cout << ex.what() << endl;
+	}
 }
+*/
 

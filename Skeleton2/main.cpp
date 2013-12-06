@@ -212,12 +212,14 @@ int main(int argc, char *argv[])
 	  glutInitWindowPosition(100, 100);
 	  glutInitWindowSize(WIDTH, HEIGHT);
 	  glutInit(&argc, argv);
+
 	  glutCreateWindow(".MQOÇì«Ç›çûÇÒÇ≈ï\é¶");
 	  glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 	  glutDisplayFunc(display);
 	  glutIdleFunc(idle);
 	  Init();
 	  glutMainLoop();
+
 	  mqoDeleteModel(model);
 	  mqoCleanup();
 	  return 0;
