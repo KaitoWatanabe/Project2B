@@ -11,16 +11,38 @@
 using namespace std;
 using namespace glm;
 
+vec3 computeNormalVector(Polygon);
+float dotProduct(vec3, vec3);
+void algorithm_7_1(void);//途中
+void algorithm_7_2(void);//手つけていない
+void algorithm_7_3(void);//手つけていない
+void algorithm_7_4(void);//手つけていない
 //Chapter.7 Geometric Models and Their Exploitation in NPR
 
-void algorithm_7_1(){//classify edges based on the angle between adjacent faces in the model M
 
-	/*for ( polygon : p) {// Model M で処理
-	vec3 np(0, 1, 0); <-compute the normal vector np for p
-	if (np.dot(V) > 0) {
-	mark p as visible;
+vec3 computeNormalVector(Polygon p) {//未完
+	/**
+	ポリゴン表面の面に対する法線ベクトルを求める。
+	*/
+	vec3 normal;
+	return normal;
+};
+
+float dotProduct(vec3 u, vec3 v){//内積
+	double dot = u.x*v.x + u.y*v.y + u.z*v.z;
+	return (float)dot;
+};
+
+void algorithm_7_1(){//classify edges based on the angle between adjacent faces in the model M
+	Polygon();
+	vec3 lookAt(2, 0, 0);
+	vec3 V = lookAt - pV;//V is a vector from the polygon to the viewer's position
+	for (Polygon : p) {// Model M で処理
+	vec3 np = computeNormalVector(p); //<-compute the normal vector np for p
+	if (dotProduct(np,V) > 0) {
+		show = true;
 	}else{
-	mark p as invisible;
+		show = false;
 	}
 	}
 
@@ -38,7 +60,7 @@ void algorithm_7_1(){//classify edges based on the angle between adjacent faces 
 	}
 	}
 	}
-	draw model according to visualization goals;*/
+	draw model according to visualization goals;
 };
 
 void algorithm_7_2(){//creating the haloed line effect
@@ -106,6 +128,28 @@ void algorithm_7_5(){
 	*/
 }
 
+class Polygon
+{
+	Polygon* p;
+	float[] vertex;//ポリゴン上の頂点を格納する
+public:
+	vec3 pV;
+	bool show;
+	Polygon();
+	~Polygon();
+
+};
+
+Polygon::Polygon()
+{
+	Polygon* p = new Polygon();
+	show = true;
+}
+
+Polygon::~Polygon()
+{
+	delete p;
+}
 /*
 int main(int argc, char *argv[])
 {
