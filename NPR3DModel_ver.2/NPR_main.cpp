@@ -1,7 +1,7 @@
 // NPR3DModel.cpp : コンソール アプリケーションのエントリ ポイントを定義します。
 //
 
-//#include "GLMetaseq.h"
+#include "GLMetaseq.h"
 #include <gl/freeglut/freeglut.h>
 #include <cmath>
 #include <gl/glm/glm.hpp>
@@ -11,14 +11,19 @@
 using namespace std;
 using namespace glm;
 
+//Chapter.7 Geometric Models and Their Exploitation in NPR
+
+
 vec3 computeNormalVector(Polygon);
 float dotProduct(vec3, vec3);
+void draw(void);
 void algorithm_7_1(void);//途中
 void algorithm_7_2(void);//手つけていない
 void algorithm_7_3(void);//手つけていない
 void algorithm_7_4(void);//手つけていない
-//Chapter.7 Geometric Models and Their Exploitation in NPR
 
+GLfloat lightpos[] = { 200.0, 150.0, 500.0, 1.0 };
+MQO_MODEL model;
 
 vec3 computeNormalVector(Polygon p) {//未完
 	/**
@@ -34,7 +39,7 @@ float dotProduct(vec3 u, vec3 v){//内積
 };
 
 void algorithm_7_1(){//classify edges based on the angle between adjacent faces in the model M
-	Polygon();
+//	Polygon();
 	vec3 lookAt(2, 0, 0);
 	vec3 V = lookAt - pV;//V is a vector from the polygon to the viewer's position
 	for (Polygon : p) {// Model M で処理
@@ -128,6 +133,28 @@ void algorithm_7_5(){
 	*/
 }
 
+void display(void)
+{
+
+	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+	glViewport(0, 0, WIDTH, HEIGHT);
+	glMatrixMode(GL_PROJECTION);
+	glLoadIdentity();
+	//視野角,アスペクト比(ウィンドウの幅/高さ),描画する範囲(最も近い距離,最も遠い距離)
+	gluPerspective(30.0, (double)WIDTH / (double)HEIGHT, 1.0, 10000.0);
+	glMatrixMode(GL_MODELVIEW);
+	glLoadIdentity();
+	//視点の設定
+	gluLookAt(150.0, 400.0, 500.0, //カメラの座標
+		0.0, 100.0, 0.0, // 注視点の座標
+		0.0, 1.0, 0.0); // 画面の上方向を指すベクトル
+	//ライトの設定
+	glLightfv(GL_LIGHT0, GL_POSITION, lightpos);
+
+	mqoCallModel(model);
+
+	glutSwapBuffers();
+}
 class Polygon
 {
 	Polygon* p;

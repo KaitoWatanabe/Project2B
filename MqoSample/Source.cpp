@@ -10,7 +10,6 @@ MQO_MODEL model;
 
 void display(void)
 {
-
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glViewport(0, 0, WIDTH, HEIGHT);
 	glMatrixMode(GL_PROJECTION);
@@ -30,10 +29,12 @@ void display(void)
 
 	glutSwapBuffers();
 }
+
 void idle(void)
 {
 	glutPostRedisplay();
 }
+
 void Init(){
 	glClearColor(0.3, 0.3, 0.3, 1.0);
 	glEnable(GL_DEPTH_TEST);
@@ -42,12 +43,13 @@ void Init(){
 	mqoInit();
 	model = mqoCreateModel("mikumikoto.mqo", 2.0);
 }
+
 int main(int argc, char *argv[])
 {
 	glutInitWindowPosition(100, 100);
 	glutInitWindowSize(WIDTH, HEIGHT);
 	glutInit(&argc, argv);
-	glutCreateWindow(".MQOÇì«Ç›çûÇÒÇ≈ï\é¶");
+	glutCreateWindow("(NPR).MQOÇì«Ç›çûÇÒÇ≈ï\é¶");
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE);
 	glutDisplayFunc(display);
 	glutIdleFunc(idle);
