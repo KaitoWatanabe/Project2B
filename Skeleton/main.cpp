@@ -4,7 +4,6 @@
 // NuiApi.hの前にWindows.hをインクルードする
 #include <Windows.h>
 #include <NuiApi.h>
-
 #include <gl/freeglut/glut.h>
 
 
