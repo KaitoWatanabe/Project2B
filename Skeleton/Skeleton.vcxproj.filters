@@ -19,4 +19,27 @@
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
+  <ItemGroup>
+    <Media Include="sound\Do.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="sound\Fa.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="sound\La.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="sound\Le.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="sound\Mi.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="sound\Si.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+    <Media Include="sound\So.wav">
+      <Filter>リソース ファイル</Filter>
+    </Media>
+  </ItemGroup>
 </Project>
