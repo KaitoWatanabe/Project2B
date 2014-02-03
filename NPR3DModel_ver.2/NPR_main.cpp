@@ -40,7 +40,7 @@ float dotProduct(vec3 u, vec3 v){//ì‡êœ
 
 void algorithm_7_1(){//classify edges based on the angle between adjacent faces in the model M
 //	Polygon();
-	vec3 lookAt(2, 0, 0);
+	vec3 lookAt(2, 0, 0);//the viewer's position
 	vec3 V = lookAt - pV;//V is a vector from the polygon to the viewer's position
 	for (Polygon : p) {// Model M Ç≈èàóù
 	vec3 np = computeNormalVector(p); //<-compute the normal vector np for p
@@ -177,7 +177,6 @@ Polygon::~Polygon()
 {
 	delete p;
 }
-/*
 int main(int argc, char *argv[])
 {
 
@@ -193,6 +192,7 @@ int main(int argc, char *argv[])
 		glutIdleFunc(idle);
 		Init();
 		glutMainLoop();
+	//	mqoMakeObjectsEx();
 		mqoDeleteModel(model);
 		mqoCleanup();
 		return 0;
@@ -202,5 +202,4 @@ int main(int argc, char *argv[])
 		cout << ex.what() << endl;
 	}
 }
-*/
 

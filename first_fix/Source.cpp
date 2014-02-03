@@ -116,7 +116,7 @@ int main(int argc, char* argv[]){
 	glutReshapeFunc(reshape);
 	glutDisplayFunc(display);
 
- cout << "Hello!" <<  endl;
+ //cout << "Hello!" <<  endl;
 	
 	glutMainLoop();
 

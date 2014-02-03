@@ -167,7 +167,8 @@ void display(void)
 	FUTL_SetLight(GL_LIGHT0, &light);
 
 	/* îwåi */
-	glClearColor(0.0f, 0.0f, 1.0f, 1.0f);
+	//glClearColor(0.0f, 0.0f, 1.0f, 1.0f);//origin
+	glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	/* É|ÉäÉSÉìï`âÊÉÇÅ[Éh */
