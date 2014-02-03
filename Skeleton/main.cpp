@@ -4,7 +4,6 @@
 // NuiApi.hの前にWindows.hをインクルードする
 #include <Windows.h>
 #include <NuiApi.h>
-
 #include <gl/freeglut/glut.h>
 
 
@@ -139,7 +138,7 @@ private:
     kinect->NuiImageGetColorPixelCoordinatesFromDepthPixelAtResolution(
       CAMERA_RESOLUTION, CAMERA_RESOLUTION,
       0, (LONG)depthX , (LONG)depthY, 0, &colorX, &colorY );
-	std::cout << part << std::endl;
+	
 	kinectX[part] = (int)colorX;
 	kinectY[part] = (int)colorY;
 	
@@ -163,6 +162,7 @@ void display(void)
 	for (int i = 0; i < 20; ++i){
 		Point(kinect.kinectX[i], kinect.kinectY[i], 20.0);
 	}
+	std::cout << kinect.kinectX[NUI_SKELETON_POSITION_HAND_LEFT] << std::endl;
 	
 	glFlush();
 }
